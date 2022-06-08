@@ -61,8 +61,6 @@ class Education(object):
         except Exception:
             print('Список оценок еще пуст')
 
-
-
     def get_id_list_of_students(self) -> set:
         return Education.__list_of_students
 
