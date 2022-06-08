@@ -40,6 +40,9 @@ class Education(object):
         Education.dict_of_teachers[self.teacher.user_name] = len(Education.teacher_marks[self.teacher.user_name])
 
     def get_average_score(self) -> float:
+
+        """ Считает среднюю оценку студента как среднее арифметическое """
+
         try:
             list_of_marks = Education.dict_of_marks[self.student.user_name]
             average_mark = sum(list_of_marks) / len(list_of_marks)
@@ -47,13 +50,18 @@ class Education(object):
         except ZeroDivisionError:
             print('Список оценок еще пуст')
 
-    def get_dict_with_students_average_score(self) -> str | dict:
+    def get_dict_with_students_average_score(self) -> dict:
 
         """ Для словаря dict_of_average_score функция создает ключ с именем  студента и в качестве значения берёт оцеку,
         которую высчитывает функция get_average_score(), если оценки не проставлены, то функция вернет сообщение об этом """
 
-        Education.dict_of_average_score[self.student.user_name] = self.get_average_score()
-        return Education.dict_of_average_score
+        try:
+            Education.dict_of_average_score[self.student.user_name] = self.get_average_score()
+            return Education.dict_of_average_score
+        except Exception:
+            print('Список оценок еще пуст')
+
+
 
     def get_id_list_of_students(self) -> set:
         return Education.__list_of_students
