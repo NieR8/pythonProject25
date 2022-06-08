@@ -24,8 +24,6 @@ class Education(object):
         print(f'Студент {self.student.user_name} зачислен на курс по {self.course}')
         Education.__list_of_students.add(self.student.user_id)
 
-
-
     def point_student_mark(self, value: int) -> None:
 
         """ Для словаря dict_of_marks функция создает ключ с именем  студента и в качестве значения создает список оценок,
