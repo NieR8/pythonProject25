@@ -24,6 +24,8 @@ class Education(object):
         print(f'Студент {self.student.user_name} зачислен на курс по {self.course}')
         Education.__list_of_students.add(self.student.user_id)
 
+
+
     def point_student_mark(self, value: int) -> None:
 
         """ Для словаря dict_of_marks функция создает ключ с именем  студента и в качестве значения создает список оценок,
@@ -38,6 +40,8 @@ class Education(object):
 
         # Считает количество оценок, которые поставил конкретный преподаватель
         Education.dict_of_teachers[self.teacher.user_name] = len(Education.teacher_marks[self.teacher.user_name])
+        self.get_average_score()
+        self.get_dict_with_students_average_score()
 
     def get_average_score(self) -> float:
 
@@ -50,10 +54,12 @@ class Education(object):
         except ZeroDivisionError:
             print('Список оценок еще пуст')
 
+
     def get_dict_with_students_average_score(self) -> dict:
 
-        """ Для словаря dict_of_average_score функция создает ключ с именем  студента и в качестве значения берёт оцеку,
-        которую высчитывает функция get_average_score(), если оценки не проставлены, то функция вернет сообщение об этом """
+        """ Для словаря dict_of_average_score функция создает ключ с именем  студента и в качестве значения берёт
+        оцеку, которую высчитывает функция get_average_score(), если оценки не проставлены, то функция вернет
+        сообщение об этом """
 
         try:
             Education.dict_of_average_score[self.student.user_name] = self.get_average_score()
