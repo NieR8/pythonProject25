@@ -8,6 +8,7 @@ if __name__ == '__main__':
     student1 = Student('Jonh')
     student2 = Student('Max')
     student3 = Student('Oleg')
+    # student4 = Student('Oleg')
     teacher1 = Teacher('Mr.Smith', 'master', '9234837123', 'abc@mail.ru', 'IT')
     teacher2 = Teacher('Mrs.Lith', 'PhD', '9134935621', 'abc@mail.com', 'DevOps')
 

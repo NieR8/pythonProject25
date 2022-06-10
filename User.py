@@ -1,5 +1,12 @@
 from abc import ABC
 import datetime
+import logging
+
+log = logging.getLogger(__name__)
+log.setLevel(logging.INFO)
+handler = logging.FileHandler('logs.txt')
+handler.setFormatter(logging.Formatter(fmt='[%(asctime)s: %(levelname)s] %(message)s'))
+log.addHandler(handler)
 
 class User(ABC):
 
@@ -22,16 +29,22 @@ class User(ABC):
     def user_name(self, val: str) -> None:
         if val not in User.lst_of_users.values():
             self.__user_name = val
+            log.info(f'Пользователь задал имя {val}')
         else:
+            log.warning('Пользователь попытался ввести имя, которое уже занято')
             raise ValueError('Имя уже занято')
+
+
 
     def find_user_by_id(self, id: int) -> str:
 
         """ Возвращает имя пользователя """
 
         if id in User.lst_of_users.keys():
+            log.info(f'Пользователь {self.user_name} попытался найти имя другого пользователя по id:{id} ')
             return User.lst_of_users[id]
         else:
+            log.info(f'Пытаясь найти пользователя, пользователь {self.user_name} ввел несуществующий id')
             raise KeyError('Нет такого id')
 
     def __str__(self):
