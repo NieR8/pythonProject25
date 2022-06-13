@@ -3,10 +3,14 @@ import datetime
 import logging
 
 log = logging.getLogger(__name__)
+log2 = logging.getLogger('warn')
 log.setLevel(logging.INFO)
 handler = logging.FileHandler('logs.txt')
+handler2 = logging.FileHandler('warnings.txt')
 handler.setFormatter(logging.Formatter(fmt='[%(asctime)s: %(levelname)s] %(message)s'))
+handler2.setFormatter(logging.Formatter(fmt='[%(asctime)s: %(levelname)s] %(message)s'))
 log.addHandler(handler)
+log2.addHandler(handler2)
 
 class User(ABC):
 
@@ -31,7 +35,7 @@ class User(ABC):
             self.__user_name = val
             log.info(f'Пользователь задал имя {val}')
         else:
-            log.warning('Пользователь попытался ввести имя, которое уже занято')
+            log2.warning('Пользователь попытался ввести имя, которое уже занято')
             raise ValueError('Имя уже занято')
 
 

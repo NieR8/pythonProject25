@@ -94,6 +94,7 @@ if __name__ == '__main__':
     print(Education.course_students)
     print(Education.teacher_students)
     print(Education.teacher_students_count)
+    print(Education.course_students_count)
 
     # education5.del_student()
     #

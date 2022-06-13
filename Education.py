@@ -13,6 +13,7 @@ class Education(object):
     course_students = defaultdict(list) #Словарь с именем курса и списком студентов, которые на нём обучаются
     teacher_students = defaultdict(set) #Словарь с именем преподавателя и списком учеников, которых он обучает
     teacher_students_count = {} #Словарь с именем преподователя и количеством студентов, которые он обучает
+    course_students_count = {} #Словарь с именем курса и количеством студентов, которые на нем обучаются
 
     def __init__(self, course: Course, student: Student, teacher: Teacher):
         self.course = course
@@ -21,6 +22,7 @@ class Education(object):
         Education.course_students[self.course.course_name].append(self.student.user_name)
         Education.teacher_students[self.teacher.user_name].add(self.student.user_name)
         Education.teacher_students_count[self.teacher.user_name] = len(Education.teacher_students[self.teacher.user_name])
+        Education.course_students_count[self.course.course_name] = len((Education.course_students[self.course.course_name]))
         print(f'Студент {self.student.user_name} зачислен на курс по {self.course}')
         Education.__list_of_students.add(self.student.user_id)
         log.info(f'На образовательную программу {self.course.course_name} был зачислен студент {self.student.user_name}'
@@ -38,7 +40,7 @@ class Education(object):
             log.info(f'Для студента {self.student.user_name} была поставлена оценка {value} преподавателем {self.teacher.user_name}'
                      f'по курсу {self.course.course_name}')
         else:
-            log.warning(f'Преподавтель {self.teacher.user_name} попытался поставить невалидную оценку {value}')
+            log2.warning(f'Преподавтель {self.teacher.user_name} попытался поставить невалидную оценку {value}')
             print('Оценка должна быть в интервале от 1 до 5')
 
         # Считает количество оценок, которые поставил конкретный преподаватель
@@ -56,7 +58,7 @@ class Education(object):
             average_mark = sum(list_of_marks) / len(list_of_marks)
             return average_mark
         except ZeroDivisionError:
-            log.warning(f'Для студента {self.student.user_name}, пытаясь посчитать среднюю оценку получилось деление '
+            log2.warning(f'Для студента {self.student.user_name}, пытаясь посчитать среднюю оценку получилось деление '
                         f'на 0, то есть еще не заполнили оценки')
             print('Список оценок еще пуст')
 
@@ -70,8 +72,8 @@ class Education(object):
         try:
             Education.dict_of_average_score[self.student.user_name] = self.get_average_score()
             return Education.dict_of_average_score
-        except Exception:
-            log.warning('Пытаясь получить словарь со студентами и их средней оценкой, предварительно не заполнили '
+        except KeyError:
+            log2.warning('Пытаясь получить словарь со студентами и их средней оценкой, предварительно не заполнили '
                         'оценки')
             print('Список оценок еще пуст')
 
@@ -82,7 +84,7 @@ class Education(object):
         if isinstance(val, Teacher):
             self.teacher = val
         else:
-            log.warning(f'Пытаясь поменять учителя {self.teacher.user_name}, в его поле ввели невалидное значение {val}')
+            log2.warning(f'Пытаясь поменять учителя {self.teacher.user_name}, в его поле ввели невалидное значение {val}')
             print('Данный объект не является преподавателем')
 
     @staticmethod

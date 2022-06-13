@@ -22,10 +22,10 @@ class Teacher(User):
                 if s.isalpha() == True:
                     self.__science_degree = value
                 else:
-                    log.warning(f'Пользователь {self.user_name} в названии научной степени ввел цифры')
+                    log2.warning(f'Пользователь {self.user_name} в названии научной степени ввел цифры')
                     print('В названии научной степени не должно быть цифр')
             else:
-                log.warning(f'Пользователь {self.user_name} в названии научной ввёл слишком много букв')
+                log2.warning(f'Пользователь {self.user_name} в названии научной ввёл слишком много букв')
                 print('Превышен лимит в 10 букв')
         else:
             print('Введите строку')
@@ -40,10 +40,10 @@ class Teacher(User):
             if len(value) == 10:
                 self.__phone_number = value
             else:
-                log.warning(f'Пользователь {self.user_name} ввёл слишком много цифр в номере телефона')
+                log2.warning(f'Пользователь {self.user_name} ввёл слишком много цифр в номере телефона')
                 print('Номер телефона должен содержать 10 цифр')
         else:
-            log.warning(f'Пользователь {self.user_name} вместо номера телефона ввёл буквы')
+            log2.warning(f'Пользователь {self.user_name} вместо номера телефона ввёл буквы')
             print('В номере телефона должны содержаться только цифры')
 
     @staticmethod
@@ -58,7 +58,7 @@ class Teacher(User):
                 and any(i in string.ascii_letters for i in new_email[:dog_index]):
             return new_email
         else:
-            log.warning(f'Пользователь ввёл невалидный адрес почты ')
+            log2.warning(f'Пользователь ввёл невалидный адрес почты ')
             raise ValueError('Невалидный адрес почты')
 
     @property
@@ -79,7 +79,7 @@ class Teacher(User):
         if isinstance(value, str) and len(value) < 100 and value.isdigit() == False:
             self.__scientific_direction = value
         else:
-            log.warning(f'Пользователь {self.user_name} попытался ввести в поле "Научное направление" из цифр или непонятных символов')
+            log2.warning(f'Пользователь {self.user_name} попытался ввести в поле "Научное направление" из цифр или непонятных символов')
             print('Это поле не должно состоять только из цифр')
 
     def get_info(self) -> None:
