@@ -23,12 +23,12 @@ class Teacher(User):
                     self.__science_degree = value
                 else:
                     log2.warning(f'Пользователь {self.user_name} в названии научной степени ввел цифры')
-                    print('В названии научной степени не должно быть цифр')
+                    raise ValueError('В названии научной степени не должно быть цифр')
             else:
                 log2.warning(f'Пользователь {self.user_name} в названии научной ввёл слишком много букв')
-                print('Превышен лимит в 10 букв')
+                raise ValueError('Превышен лимит в 10 букв')
         else:
-            print('Введите строку')
+            raise ValueError('Введите строку')
 
     @property
     def phone_number(self) -> str:
@@ -41,10 +41,10 @@ class Teacher(User):
                 self.__phone_number = value
             else:
                 log2.warning(f'Пользователь {self.user_name} ввёл слишком много цифр в номере телефона')
-                print('Номер телефона должен содержать 10 цифр')
+                raise ValueError('Номер телефона должен содержать 10 цифр')
         else:
             log2.warning(f'Пользователь {self.user_name} вместо номера телефона ввёл буквы')
-            print('В номере телефона должны содержаться только цифры')
+            raise ValueError('В номере телефона должны содержаться только цифры')
 
     @staticmethod
     def set_email(new_email: str) -> str:
@@ -81,7 +81,7 @@ class Teacher(User):
             self.__scientific_direction = value
         else:
             log2.warning(f'Пользователь {self.user_name} попытался ввести в поле "Научное направление" из цифр или непонятных символов')
-            print('Это поле не должно состоять только из цифр')
+            raise ValueError('Это поле не должно состоять только из цифр')
 
     def get_info(self) -> None:
 
