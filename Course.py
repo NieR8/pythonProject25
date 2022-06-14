@@ -16,6 +16,19 @@ class Course(object):
         self.ending_date = None
         log.info(f'Был создан курс под названием {self.course_name} с id: {self.course_id}')
 
+    @property
+    def course_name(self) -> str:
+        return self.__course_name
+
+    @course_name.setter
+    def course_name(self, val: str) -> None:
+        if val not in Course.list_of_diciplines:
+            self.__course_name = val
+            log.info(f'Задано имя курса {val}')
+        else:
+            log2.warning('Пользователь попытался ввести имя курса, которое уже занято')
+            raise ValueError('Такой курс уже существует')
+
     def set_date(self, year: int, month: int, day: int) -> None:
 
         self.beginning_date = datetime.date(year, month, day)

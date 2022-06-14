@@ -15,7 +15,7 @@ log2.addHandler(handler2)
 class User(ABC):
 
     __id = 0
-    lst_of_users = {}
+    lst_of_users = {} #Словарь с id пользователя и его именем
 
     def __init__(self, user_name: str):
 
@@ -42,7 +42,7 @@ class User(ABC):
 
     def find_user_by_id(self, id: int) -> str:
 
-        """ Возвращает имя пользователя """
+        """ Поиск имя пользователя по id """
 
         if id in User.lst_of_users.keys():
             log.info(f'Пользователь {self.user_name} попытался найти имя другого пользователя по id:{id} ')

@@ -76,6 +76,7 @@ class Teacher(User):
 
     @scientific_direction.setter
     def scientific_direction(self, value) -> None:
+
         if isinstance(value, str) and len(value) < 100 and value.isdigit() == False:
             self.__scientific_direction = value
         else:
